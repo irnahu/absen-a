@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Model untuk siswa
 
 class OrangTua(models.Model):
@@ -12,7 +13,13 @@ class OrangTua(models.Model):
     def __str__(self):
         return self.nama
 
+class Presensi(models.Model):
+    siswa = models.CharField(max_length=100)
+    tanggal = models.DateField()
+    status = models.CharField(max_length=10)
 
+    def __str__(self):
+        return f"{self.siswa} - {self.tanggal}"
 
 class Siswa(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='keuangan_siswa')
@@ -102,3 +109,5 @@ class PembayaranSPP(models.Model):
 
     def __str__(self):
         return f"{self.siswa.nama} - {self.get_bulan_display()} - {self.status_bayar}"
+    
+    

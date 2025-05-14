@@ -24,5 +24,6 @@ urlpatterns = [
     path('daftar-siswa/', views.daftar_siswa, name='daftar_siswa'),
     path('akademik/', views.akademik, name='akademik'),
     path('akademik/siswa/', views.akademik_siswa_view, name='akademik_siswa'),
+
  
 ]

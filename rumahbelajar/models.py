@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from keuangan.models import Presensi
+
 
 class OrangTua(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='rumahbelajar_orangtua')
@@ -78,3 +80,10 @@ class Kelas(models.Model):
 class MataPelajaran(models.Model):
     nama_pelajaran = models.CharField(max_length=100)
     kelas = models.ForeignKey('Kelas', on_delete=models.CASCADE)
+    
+def ambil_presensi_siswa():
+    from keuangan.models import Presensi
+    data = Presensi.objects.all()
+    return data
+
+

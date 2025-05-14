@@ -141,11 +141,11 @@
 
     <!-- Sidebar -->
     <nav class="sidebar">
-    <div class="sidebar-header">Menu </div>
+      <div class="sidebar-header">Menu </div>
     <ul class="sidebar-menu">
         <li><a href="{% url 'rumahbelajar:home' %}">🏠 Beranda</a></li>
-        <li><a href="{% url 'rumahbelajar:akademik_siswa' %}">👨‍👧 Akademik Siswa</a></li>  
-        <li><a href="#">👨‍👧 Presensi Siswa</a></li>  
+        <li><a href="{% url 'rumahbelajar:akademik_siswa' %}">👨‍👧 Akademik Siswa </a></li>  
+        <li><a href="#">👨‍👧 Presensi Siswa </a></li>  
         <li><a href="#"><span>💳</span> Tagihan</a></li>
         <li><a href="#"><span>📞</span> Kontak</a></li>
         <li><a href="#"><span>🔒</span> Logout</a></li>
@@ -159,50 +159,32 @@
             <p>Selamat datang di Daftar Akademik.</p>
         </header>
 
-<!-- Akademik -->
-<div class="card akademik-list">
-    <h3>📚 Daftar Akademik</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Kelas</th>
-                <th>Mata Pelajaran</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Data statis (dummy) -->
-            <tr>
-                <td>1</td>
-                <td>10A</td>
-                <td>Matematika</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>10B</td>
-                <td>Fisika</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>11A</td>
-                <td>Bahasa Inggris </td>
-            </tr>
-
-            <!-- Data dari Django (jika ada) -->
-            {% for kelas in kelas_list %}
-            <tr>
-                <td>{{ forloop.counter }}</td>
-                <td>{{ kelas.nama }}</td>
-                <td>{{ kelas.mata_pelajaran }}</td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="3">Tidak ada data akademik</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
+        <!-- Akademik -->
+        <div class="card akademik-list">
+            <h3>📚 Daftar Akademik</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Kelas</th>
+                        <th>Mata Pelajaran</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for kelas in kelas_list %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ kelas.nama }}</td>
+                        <td>{{ kelas.mata_pelajaran }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3">Tidak ada data akademik</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
         <footer>
             <p>&copy; 2025 Sistem Absensi Bimbel | All Rights Reserved</p>

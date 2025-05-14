@@ -4,7 +4,7 @@ from .forms import AbsensiForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect, get_object_or_404
 import qrcode
-from keuangan.models import Siswa as SiswaKeuangan
+from keuangan.models import Siswa as SiswaKeuangan, Tagihan
 from django.http import HttpResponse
 from io import BytesIO
 from datetime import date
@@ -47,10 +47,12 @@ def lihat_absensi_sendiri(request):
     return render(request, 'absen/lihat_absensi_siswa.html')
 
 
+
+
 @login_required
 def jadwal_les(request):
     jadwal = JadwalLes.objects.all()
-    return render(request, 'absen/jadwal_les.html', {'jadwals': jadwals})
+    return render(request, 'absen/jadwal_les.html', {'jadwals': jadwal})
 
 
 @login_required
@@ -136,8 +138,8 @@ def dashboard_siswa(request):
 @login_required
 def dashboard_orangtua(request):
     anak = get_object_or_404(Siswa, orangtua=request.user)
-    total_kehadiran = Presensi.objects.filter(siswa=anak, status='Hadir').count()
-    total_tagihan = Tagihan.objects.filter(siswa=anak).aggregate(Sum('jumlah'))['jumlah__sum'] or 0
+    total_kehadiran = Absensi.objects.filter(siswa=anak, status='Hadir').count()
+    total_tagihan = Tagihan.objects.filter(siswa=anak).aggregate(sum('jumlah'))['jumlah__sum'] or 0
     status_tagihan = 'Lunas' if not Tagihan.objects.filter(siswa=anak, status='Belum Lunas').exists() else 'Belum Lunas'
 
     context = {
@@ -221,3 +223,5 @@ def dashboard_admin(request):
         'jumlah_mapel': jumlah_mapel,
     }
     return render(request, 'admin/dashboard_admin.html', context)
+
+
